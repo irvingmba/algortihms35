@@ -1,0 +1,14 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "imba",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "jest": "^27.0.4"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
