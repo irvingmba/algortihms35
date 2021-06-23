@@ -52,15 +52,45 @@ public class SectionA {
 						Iterator<Entry<Integer, Integer>> itAreas = areas.entrySet().iterator();
 						while(itAreas.hasNext()) {
 							Entry<Integer,Integer> entry = (Entry) itAreas.next();
-							if(col >= entry.getKey()) {
-								area = area < (entry.getValue()+1)*entry.getKey() ? (entry.getValue()+1)*entry.getKey() : area;
-								areas.put(entry.getKey(), entry.getValue()+1);
+							int entryKey = entry.getKey();
+							int entryValue = entry.getValue();
+							int entryArea = entryKey * entryValue;
+							if(col >= entryKey) {
+								area = area < (entryValue+1)*entryKey ? (entryValue+1)*entryKey : area;
+								areas.put(entryKey, entryValue+1);
+								continue;
+							} else if(area < entryArea) {
+								area = entryArea;
 							}
+							areas.remove(entryKey);
+						}
+					} else {
+						int largest = 0;
+						Iterator<Entry<Integer, Integer>> itAreas = areas.entrySet().iterator();
+						while(itAreas.hasNext()) {
+							Entry<Integer,Integer> entry = (Entry) itAreas.next();
+							int entryKey = entry.getKey();
+							int entryValue = entry.getValue();
+							int entryArea = entryKey * entryValue;
+							if(col >= entryKey) {
+								area = area < (entryValue+1) * entryKey ? (entryValue+1) * entryKey : area;
+								areas.put(entryKey, entryValue+1);
+								continue;
+							} else if(area< entryArea) {
+								area = entryArea;
+							}
+							if(entryValue > largest) largest = entryValue;
+							areas.remove(entryKey);
+							areas.put(col, largest+1);
+							area = area < (largest+1) * col ? (largest+1) * col : area; 
 						}
 					}
+				} else {
+					areas.clear();
 				}
 			}
+			greatest = greatest < area ? area : greatest;
 		}
-		
+		return greatest;
 	}
 }

@@ -42,5 +42,23 @@ class SectionATest {
 		}
 		assertEquals(response, outputStreamCaptor.toString());
 	}
+	
+	@Test
+	void testGreatestArea() {
+		int case1[][] = new int[][] {
+			{0, 1, 1},
+		    {0, 1, 1},
+		    {1, 1, 0}
+		};
+		int case4[][] = new int[][] {
+			{1, 1, 0, 0, 1}, 
+			{1, 1, 0, 1, 0},
+			{1, 1, 1, 1, 1},
+			{0, 1, 1, 0, 1},
+			{1, 0, 1, 1, 1}
+		};
+		assertEquals(SectionA.greatestArea(case1), 4);
+		assertEquals(SectionA.greatestArea(case4), 6);
+	}
 
 }
