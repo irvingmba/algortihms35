@@ -56,5 +56,19 @@ class SectionATest {
 				{ 0, 0, 1, 1 } };
 		assertEquals(SectionA.groupOnes(simpleCase), 3);
 	}
+	
+	@Test
+	void testRotateMatrix() {
+		int[][] sample1 = {
+				{1, 2, 3},
+				{4, 5, 6},
+				{7, 8, 9}
+		}, expected = {
+				{3, 6, 9},
+				{2, 5, 8},
+				{1, 4, 7}
+		};
+		assertArrayEquals(SectionA.rotateMatrix(sample1), expected);
+	}
 
 }

@@ -62,4 +62,16 @@ describe("Testing function to find groups of 1s", () => {
     const groups = groupOnes(divCase);
     expect(groups).toBe(3);
   });
+
+  test("4 Groups case", () => {
+    const groupCase = [
+      [1, 0, 1, 0, 1],
+      [0, 0, 0, 0, 0],
+      [1, 0, 1, 0, 1],
+      [1, 0, 1, 0, 1],
+      [1, 1, 1, 1, 1],
+    ];
+    const groups = groupOnes(groupCase);
+    expect(groups).toBe(4);
+  });
 });
