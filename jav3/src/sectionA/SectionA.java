@@ -51,7 +51,7 @@ public class SectionA {
 					if (areas.containsKey(col)) {
 						Iterator<Entry<Integer, Integer>> itAreas = areas.entrySet().iterator();
 						while (itAreas.hasNext()) {
-							Entry<Integer, Integer> entry = (Entry) itAreas.next();
+							Entry<Integer, Integer> entry = (Entry<Integer, Integer>) itAreas.next();
 							int entryKey = entry.getKey();
 							int entryValue = entry.getValue();
 							int entryArea = entryKey * entryValue;
@@ -68,7 +68,7 @@ public class SectionA {
 						int largest = 0;
 						Iterator<Entry<Integer, Integer>> itAreas = areas.entrySet().iterator();
 						while (itAreas.hasNext()) {
-							Entry<Integer, Integer> entry = (Entry) itAreas.next();
+							Entry<Integer, Integer> entry = (Entry<Integer,Integer>) itAreas.next();
 							int entryKey = entry.getKey();
 							int entryValue = entry.getValue();
 							int entryArea = entryKey * entryValue;
@@ -133,5 +133,18 @@ public class SectionA {
 			prev = fused;
 		}
 		return last - leftChanges.size();
+	}
+	
+	static int[][] rotateMatrix(int[][] matrix){
+		int[][] rotated = new int[matrix[0].length][matrix.length];
+		for(int i=0; i<matrix.length; ++i) {
+			int[] row = matrix[i];
+			int rotIndexJ = i;
+			for(int j=0; j<row.length; ++j) {
+				int col = row[j], rotIndexI = row.length - 1 - j;
+				rotated[rotIndexI][rotIndexJ] = col;
+			}
+		}
+		return rotated;
 	}
 }
