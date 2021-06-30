@@ -70,5 +70,20 @@ class SectionATest {
 		};
 		assertArrayEquals(SectionA.rotateMatrix(sample1), expected);
 	}
+	
+	@Test
+	void testMergeArray() {
+		int[] sample1A = new int[6], sample1B = new int[] {100,200,300};
+		sample1A[0] = 10;
+		sample1A[1] = 20;
+		sample1A[2] = 30;
+		assertArrayEquals(SectionA.mergeArray(sample1A, sample1B), new int[] {10,20,30,100,200,300});
+		
+		int[] sample2A = new int[6], sample2B = new int[] {5,15,25};
+		sample2A[0] = 10;
+		sample2A[1] = 20;
+		sample2A[2] = 30;
+		assertArrayEquals(SectionA.mergeArray(sample2A, sample2B), new int[] {5,10,15,20,25,30});
+	}
 
 }
