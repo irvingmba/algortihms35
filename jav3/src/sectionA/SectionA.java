@@ -147,4 +147,22 @@ public class SectionA {
 		}
 		return rotated;
 	}
+	
+	static int[] mergeArray(int[] first, int[] second) {
+		int pointer, merged;
+		pointer = merged = 0;
+		while(merged < second.length) {
+			int fLast = first.length-second.length-1-pointer+merged > -1 ? first[first.length-second.length-1-pointer+merged] : Integer.MIN_VALUE, 
+					sLast = second[second.length-1-merged],
+					lastPosition = first.length-1-pointer;
+			if(fLast > sLast) {
+				first[lastPosition] = fLast;
+			} else {
+				first[lastPosition] = sLast;
+				++merged;
+			}
+			++pointer;
+		}
+		return first;
+	}
 }
