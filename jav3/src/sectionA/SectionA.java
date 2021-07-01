@@ -2,6 +2,7 @@ package sectionA;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -164,5 +165,39 @@ public class SectionA {
 			++pointer;
 		}
 		return first;
+	}
+	
+	static int[][] zeroMatrix(int[][] matrix) {
+		HashSet<Integer> zeroColumn = new HashSet<>();
+		int[][] zeroMatrix = new int[matrix.length][matrix[0].length];
+		for(int i=0; i<matrix.length; ++i) {
+			int[] row = matrix[i];
+			boolean zeroRow = false;
+			for(int j=0; j<row.length; ++j) {
+				int col = row[j];
+				if(col == 0) {
+					zeroRow = true;
+					zeroColumn.add(j);
+				}
+			}
+			if(zeroRow) {
+				zeroMatrix[i] = new int[row.length];
+			} else {
+				zeroMatrix[i] = row;
+			}
+		}
+		int[] zeroColValues = zeroColumn.stream().mapToInt(Integer::intValue).toArray();
+		if (zeroColumn.size()>0) {
+			for(int i=0; i<zeroMatrix.length; ++i) {
+				if(!zeroColumn.contains(i)) {
+					int[] row = zeroMatrix[i];
+					for(int j=0; j<zeroColValues.length; ++j) {
+						int zeroCol = zeroColValues[j];
+						row[zeroCol] = 0;
+					}
+				}
+			}
+		}
+		return zeroMatrix;
 	}
 }
