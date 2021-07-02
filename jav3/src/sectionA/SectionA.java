@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.IntStream;
@@ -69,7 +70,7 @@ public class SectionA {
 						int largest = 0;
 						Iterator<Entry<Integer, Integer>> itAreas = areas.entrySet().iterator();
 						while (itAreas.hasNext()) {
-							Entry<Integer, Integer> entry = (Entry<Integer,Integer>) itAreas.next();
+							Entry<Integer, Integer> entry = (Entry<Integer, Integer>) itAreas.next();
 							int entryKey = entry.getKey();
 							int entryValue = entry.getValue();
 							int entryArea = entryKey * entryValue;
@@ -106,10 +107,9 @@ public class SectionA {
 				int col = row[j];
 				if (col != 0) {
 					int topCol = leftChanges.containsKey(prev[j]) ? leftChanges.get(prev[j]) : prev[j],
-							leftCol = fused.length == 0 || j-1 < 0 ? 0
-									: leftChanges.containsKey(fused[j-1])
-											? leftChanges.get(fused[j-1])
-											: fused[j-1];
+							leftCol = fused.length == 0 || j - 1 < 0 ? 0
+									: leftChanges.containsKey(fused[j - 1]) ? leftChanges.get(fused[j - 1])
+											: fused[j - 1];
 					if (topCol == 0) {
 						if (leftCol == 0) {
 							fused[j] = ++last;
@@ -135,28 +135,29 @@ public class SectionA {
 		}
 		return last - leftChanges.size();
 	}
-	
-	static int[][] rotateMatrix(int[][] matrix){
+
+	static int[][] rotateMatrix(int[][] matrix) {
 		int[][] rotated = new int[matrix[0].length][matrix.length];
-		for(int i=0; i<matrix.length; ++i) {
+		for (int i = 0; i < matrix.length; ++i) {
 			int[] row = matrix[i];
 			int rotIndexJ = i;
-			for(int j=0; j<row.length; ++j) {
+			for (int j = 0; j < row.length; ++j) {
 				int col = row[j], rotIndexI = row.length - 1 - j;
 				rotated[rotIndexI][rotIndexJ] = col;
 			}
 		}
 		return rotated;
 	}
-	
+
 	static int[] mergeArray(int[] first, int[] second) {
 		int pointer, merged;
 		pointer = merged = 0;
-		while(merged < second.length) {
-			int fLast = first.length-second.length-1-pointer+merged > -1 ? first[first.length-second.length-1-pointer+merged] : Integer.MIN_VALUE, 
-					sLast = second[second.length-1-merged],
-					lastPosition = first.length-1-pointer;
-			if(fLast > sLast) {
+		while (merged < second.length) {
+			int fLast = first.length - second.length - 1 - pointer + merged > -1
+					? first[first.length - second.length - 1 - pointer + merged]
+					: Integer.MIN_VALUE, sLast = second[second.length - 1 - merged],
+					lastPosition = first.length - 1 - pointer;
+			if (fLast > sLast) {
 				first[lastPosition] = fLast;
 			} else {
 				first[lastPosition] = sLast;
@@ -166,32 +167,32 @@ public class SectionA {
 		}
 		return first;
 	}
-	
+
 	static int[][] zeroMatrix(int[][] matrix) {
 		HashSet<Integer> zeroColumn = new HashSet<>();
 		int[][] zeroMatrix = new int[matrix.length][matrix[0].length];
-		for(int i=0; i<matrix.length; ++i) {
+		for (int i = 0; i < matrix.length; ++i) {
 			int[] row = matrix[i];
 			boolean zeroRow = false;
-			for(int j=0; j<row.length; ++j) {
+			for (int j = 0; j < row.length; ++j) {
 				int col = row[j];
-				if(col == 0) {
+				if (col == 0) {
 					zeroRow = true;
 					zeroColumn.add(j);
 				}
 			}
-			if(zeroRow) {
+			if (zeroRow) {
 				zeroMatrix[i] = new int[row.length];
 			} else {
 				zeroMatrix[i] = row;
 			}
 		}
 		int[] zeroColValues = zeroColumn.stream().mapToInt(Integer::intValue).toArray();
-		if (zeroColumn.size()>0) {
-			for(int i=0; i<zeroMatrix.length; ++i) {
-				if(!zeroColumn.contains(i)) {
+		if (zeroColumn.size() > 0) {
+			for (int i = 0; i < zeroMatrix.length; ++i) {
+				if (!zeroColumn.contains(i)) {
 					int[] row = zeroMatrix[i];
-					for(int j=0; j<zeroColValues.length; ++j) {
+					for (int j = 0; j < zeroColValues.length; ++j) {
 						int zeroCol = zeroColValues[j];
 						row[zeroCol] = 0;
 					}
@@ -199,5 +200,25 @@ public class SectionA {
 			}
 		}
 		return zeroMatrix;
+	}
+
+	static int[] sumArray(int[] first, int[] second) {
+		int largestLength = first.length > second.length ? first.length : second.length, index = 0, add1 = 0, add2 = 0,
+				extra = 0;
+		LinkedList<Integer> totalList = new LinkedList<>();
+		while (index < largestLength) {
+			if ((index < first.length && Math.floor(first[index] / 10) != 0)
+					|| (index < second.length && Math.floor(second[index] / 10) != 0))
+				throw new Error("Input a single-digit array");
+			add1 = (int) (first.length > index ? first[index] : 0);
+			add2 = (int) (second.length > index ? second[index] : 0);
+			int sum = add1 + add2 + extra;
+			totalList.addFirst(sum % 10);
+			extra = Math.floorDiv(sum, 10);
+			++index;
+		}
+		if (extra > 0)
+			totalList.addFirst(extra);
+		return totalList.stream().mapToInt(Integer::intValue).toArray();
 	}
 }

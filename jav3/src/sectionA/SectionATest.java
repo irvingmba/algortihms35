@@ -88,5 +88,13 @@ class SectionATest {
 		assertArrayEquals(SectionA.zeroMatrix(sample2), new int[][] { { 1, 0, 1, 0, 1 }, { 0, 0, 0, 0, 0 },
 				{ 1, 0, 1, 0, 1 }, { 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1 } });
 	}
+	
+	@Test
+	void testSumArray() {
+		int[] sum1A = new int[] {9,9}, sum1B = new int[] {1}, res1 = new int[] {1,0,0};
+		assertArrayEquals(SectionA.sumArray(sum1A, sum1B), res1);
+		int[] sum2A = new int[] {9,9}, sum2B = new int[] {1,0,1}, res2 = new int[] {2,0,0};
+		assertArrayEquals(SectionA.sumArray(sum2A, sum2B), res2);
+	}
 
 }
