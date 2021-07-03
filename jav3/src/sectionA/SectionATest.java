@@ -1,9 +1,11 @@
 package sectionA;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -95,6 +97,22 @@ class SectionATest {
 		assertArrayEquals(SectionA.sumArray(sum1A, sum1B), res1);
 		int[] sum2A = new int[] {9,9}, sum2B = new int[] {1,0,1}, res2 = new int[] {2,0,0};
 		assertArrayEquals(SectionA.sumArray(sum2A, sum2B), res2);
+	}
+	
+	@Test
+	void testSwapArrayPos() {
+		int[] sample1 = new int[] {2,1,3,0}, expected1 = new int[] {3,1,0,2};
+		assertArrayEquals(SectionA.swapArrayPos(sample1), expected1);
+		int[] sample2 = new int[] {2,1,2,2,4}, expected2 = new int[] {2,1,2,2,4};
+		assertArrayEquals(SectionA.swapArrayPos(sample2), expected2);
+	}
+	
+	@Test
+	void testShuffleArray() {
+		int[] sample1 = new int[] {1,2,3,4,5};
+		assertFalse(Arrays.equals(SectionA.shuffleArray(sample1), sample1));
+		int[] sample2 = new int[] {1,2};
+		assertFalse(Arrays.equals(SectionA.shuffleArray(sample2), sample2));
 	}
 
 }

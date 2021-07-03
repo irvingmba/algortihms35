@@ -221,4 +221,26 @@ public class SectionA {
 			totalList.addFirst(extra);
 		return totalList.stream().mapToInt(Integer::intValue).toArray();
 	}
+	
+	static int[] swapArrayPos(int[] arr) {
+		int[] swaped = new int[arr.length];
+		for(int i=0; i<arr.length; ++i) {
+			int num = arr[i];
+			if(num < 0 || num > arr.length-1) throw new Error("Input a proper array");
+			swaped[i] = arr[num];
+		}
+		return swaped;
+	}
+	
+	static int[]  shuffleArray(int[] arr) {
+		int[] shuffled = new int[arr.length];
+		for(int i=0; i<arr.length; ++i) {
+			int random = (int) Math.ceil(Math.random()*(arr.length-1));
+			int temp = shuffled[i] !=0 ? shuffled[i] : arr[i];
+			shuffled[random] = shuffled[random] !=0 ? shuffled[random] : arr[random];
+			shuffled[i] = shuffled[random];
+			shuffled[random] = temp;
+		}
+		return shuffled;
+	}
 }
