@@ -26,13 +26,16 @@ public class SectionA {
 	}
 
 	public static void numTo100() {
-		int[] values = new int[100];
-		IntStream stream = Arrays.stream(values);
-
-		stream.reduce(1, (acc, current) -> {
-			System.out.println(acc);
-			return ++acc;
-		});
+		numTo100(1);
+	}
+	public static void numTo100(int step) {
+		try {
+			System.out.println(step);
+			int test = 1/(100-step);
+			numTo100(step+1);
+		} catch(Exception e) {
+			return;
+		}
 	}
 
 	public static int greatestArea(int[][] areaSet) {
