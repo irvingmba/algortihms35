@@ -12,10 +12,17 @@ import java.util.stream.IntStream;
 public class SectionA {
 
 	public static int maxArrayValue(int[] arr) {
+		return maxArrayValue(arr, 0);
+	}
+	public static int maxArrayValue(int[] arr, int index) {
 		if (arr.length == 0)
 			throw new Error("Input a non-empty array");
-		IntStream stream = Arrays.stream(arr);
-		return stream.reduce(Integer.MIN_VALUE, (prev, current) -> prev > current ? prev : current);
+		if(index<arr.length-1) {
+			int current = arr[index];
+			int rest = maxArrayValue(arr, index+1);
+			return current > rest ? current : rest;
+		}
+		return arr[index];
 	}
 
 	public static void numTo100() {
