@@ -14,12 +14,13 @@ function greatestArea(areaSet = []) {
 function getArea(row) {
   let area = 0;
   const areas = new Map();
-  row.map((col) => {
+  for(let i=0; i<row.length; ++i){
+    const col = row[i];
     if (col) {
       if (areas.size === 0) {
         areas.set(col, 1);
         area = col;
-        return col;
+        continue;
       }
       if (areas.has(col)) {
         areas.forEach((value, key) => {
@@ -49,7 +50,7 @@ function getArea(row) {
     } else {
       areas.clear();
     }
-  });
+  }
   return area;
 }
 
