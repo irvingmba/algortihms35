@@ -14,12 +14,13 @@ public class SectionA {
 	public static int maxArrayValue(int[] arr) {
 		return maxArrayValue(arr, 0);
 	}
+
 	public static int maxArrayValue(int[] arr, int index) {
 		if (arr.length == 0)
 			throw new Error("Input a non-empty array");
-		if(index<arr.length-1) {
+		if (index < arr.length - 1) {
 			int current = arr[index];
-			int rest = maxArrayValue(arr, index+1);
+			int rest = maxArrayValue(arr, index + 1);
 			return current > rest ? current : rest;
 		}
 		return arr[index];
@@ -28,12 +29,13 @@ public class SectionA {
 	public static void numTo100() {
 		numTo100(1);
 	}
+
 	public static void numTo100(int step) {
 		try {
 			System.out.println(step);
-			int test = 1/(100-step);
-			numTo100(step+1);
-		} catch(Exception e) {
+			int test = 1 / (100 - step);
+			numTo100(step + 1);
+		} catch (Exception e) {
 			return;
 		}
 	}
@@ -231,26 +233,49 @@ public class SectionA {
 			totalList.addFirst(extra);
 		return totalList.stream().mapToInt(Integer::intValue).toArray();
 	}
-	
+
 	static int[] swapArrayPos(int[] arr) {
 		int[] swaped = new int[arr.length];
-		for(int i=0; i<arr.length; ++i) {
+		for (int i = 0; i < arr.length; ++i) {
 			int num = arr[i];
-			if(num < 0 || num > arr.length-1) throw new Error("Input a proper array");
+			if (num < 0 || num > arr.length - 1)
+				throw new Error("Input a proper array");
 			swaped[i] = arr[num];
 		}
 		return swaped;
 	}
-	
-	static int[]  shuffleArray(int[] arr) {
+
+	static int[] shuffleArray(int[] arr) {
 		int[] shuffled = new int[arr.length];
-		for(int i=0; i<arr.length; ++i) {
-			int random = (int) Math.ceil(Math.random()*(arr.length-1));
-			int temp = shuffled[i] !=0 ? shuffled[i] : arr[i];
-			shuffled[random] = shuffled[random] !=0 ? shuffled[random] : arr[random];
+		for (int i = 0; i < arr.length; ++i) {
+			int random = (int) Math.ceil(Math.random() * (arr.length - 1));
+			int temp = shuffled[i] != 0 ? shuffled[i] : arr[i];
+			shuffled[random] = shuffled[random] != 0 ? shuffled[random] : arr[random];
 			shuffled[i] = shuffled[random];
 			shuffled[random] = temp;
 		}
 		return shuffled;
+	}
+
+	static int[] reverseBlocksOf(int[] arr, int size) {
+		int blocks = Math.floorDiv(arr.length, size), lastChunk = arr.length - blocks * size;
+		int[] reversed = new int[arr.length];
+		for (int block = 0; block < blocks; ++block) {
+			int halfBlock = (int) Math.ceil(size / 2);
+			for (int j = 0; j < halfBlock; ++j) {
+				int first = j+size*block, last = size*(block+1)-1-j;
+				reversed[first] = arr[last];
+				reversed[last] = arr[first];
+			}
+		}
+		if(lastChunk != 0) {
+			int halfChunk = (int) Math.ceil(lastChunk/2);
+			for(int i=0; i<halfChunk; ++i) {
+				int first = i + size * blocks, last = size * blocks + lastChunk - 1 - i;
+				reversed[first] = arr[last];
+				reversed[last] = arr[first];
+			}
+		}
+		return reversed;
 	}
 }
