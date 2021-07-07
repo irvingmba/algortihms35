@@ -90,29 +90,37 @@ class SectionATest {
 		assertArrayEquals(SectionA.zeroMatrix(sample2), new int[][] { { 1, 0, 1, 0, 1 }, { 0, 0, 0, 0, 0 },
 				{ 1, 0, 1, 0, 1 }, { 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1 } });
 	}
-	
+
 	@Test
 	void testSumArray() {
-		int[] sum1A = new int[] {9,9}, sum1B = new int[] {1}, res1 = new int[] {1,0,0};
+		int[] sum1A = new int[] { 9, 9 }, sum1B = new int[] { 1 }, res1 = new int[] { 1, 0, 0 };
 		assertArrayEquals(SectionA.sumArray(sum1A, sum1B), res1);
-		int[] sum2A = new int[] {9,9}, sum2B = new int[] {1,0,1}, res2 = new int[] {2,0,0};
+		int[] sum2A = new int[] { 9, 9 }, sum2B = new int[] { 1, 0, 1 }, res2 = new int[] { 2, 0, 0 };
 		assertArrayEquals(SectionA.sumArray(sum2A, sum2B), res2);
 	}
-	
+
 	@Test
 	void testSwapArrayPos() {
-		int[] sample1 = new int[] {2,1,3,0}, expected1 = new int[] {3,1,0,2};
+		int[] sample1 = new int[] { 2, 1, 3, 0 }, expected1 = new int[] { 3, 1, 0, 2 };
 		assertArrayEquals(SectionA.swapArrayPos(sample1), expected1);
-		int[] sample2 = new int[] {2,1,2,2,4}, expected2 = new int[] {2,1,2,2,4};
+		int[] sample2 = new int[] { 2, 1, 2, 2, 4 }, expected2 = new int[] { 2, 1, 2, 2, 4 };
 		assertArrayEquals(SectionA.swapArrayPos(sample2), expected2);
 	}
-	
+
 	@Test
 	void testShuffleArray() {
-		int[] sample1 = new int[] {1,2,3,4,5};
+		int[] sample1 = new int[] { 1, 2, 3, 4, 5 };
 		assertFalse(Arrays.equals(SectionA.shuffleArray(sample1), sample1));
-		int[] sample2 = new int[] {1,2};
+		int[] sample2 = new int[] { 1, 2 };
 		assertFalse(Arrays.equals(SectionA.shuffleArray(sample2), sample2));
+	}
+
+	@Test
+	void testReverseBlocks() {
+		int[] sample1 = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+		assertArrayEquals(SectionA.reverseBlocksOf(sample1, 4), new int[] { 4, 3, 2, 1, 8, 7, 6, 5, 12, 11, 10, 9 });
+		int[] sample2 = new int[] { 1, 2, 3, 4, 5, 6 };
+		assertArrayEquals(SectionA.reverseBlocksOf(sample2, 4), new int[] { 4, 3, 2, 1, 6, 5 });
 	}
 
 }
