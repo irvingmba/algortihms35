@@ -1,6 +1,5 @@
 package sectionA;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
@@ -121,6 +120,19 @@ class SectionATest {
 		assertArrayEquals(SectionA.reverseBlocksOf(sample1, 4), new int[] { 4, 3, 2, 1, 8, 7, 6, 5, 12, 11, 10, 9 });
 		int[] sample2 = new int[] { 1, 2, 3, 4, 5, 6 };
 		assertArrayEquals(SectionA.reverseBlocksOf(sample2, 4), new int[] { 4, 3, 2, 1, 6, 5 });
+	}
+
+	@Test
+	void testCircularQueue() {
+		CircularQueue simpleQueue = new CircularQueue(5);
+		for (int i = 0; i < simpleQueue.getSize(); ++i) {
+			simpleQueue.enQueue(i);
+			assertEquals((double) simpleQueue.getFront(), 0);
+			assertEquals((double) simpleQueue.getRear(), (double) i);
+		}
+		for (int i = 0; i < simpleQueue.getSize(); ++i) {
+			assertEquals((double) simpleQueue.deQueue(), i);
+		}
 	}
 
 }
