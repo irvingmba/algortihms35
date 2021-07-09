@@ -135,4 +135,17 @@ class SectionATest {
 		}
 	}
 
+	@Test
+	void testFlattenArray() {
+		Object[] sample1 = new Object[] { 1, new Object[] { 2, new Object[] { 3 }, 4 }, 5 };
+		assertArrayEquals(new int[] { 1, 2, 3, 4, 5 }, FlattenArray.recursiveMode(sample1));
+		assertArrayEquals(new int[] { 1, 2, 3, 4, 5 }, FlattenArray.iterativeMode(sample1));
+		Object[] sample2 = new Object[] { new Object[] { new Object[] { 1 }, 2 }, 3, 4 };
+		assertArrayEquals(new int[] { 1, 2, 3, 4 }, FlattenArray.recursiveMode(sample2));
+		assertArrayEquals(new int[] { 1, 2, 3, 4 }, FlattenArray.iterativeMode(sample2));
+		Object[] sample3 = new Object[] { 1, new Object[] { 2, 3 }, 4, new Object[] { 5, 6 }, 7 };
+		assertArrayEquals(new int[] {1,2,3,4,5,6,7}, FlattenArray.recursiveMode(sample3));
+		assertArrayEquals(new int[] {1,2,3,4,5,6,7}, FlattenArray.iterativeMode(sample3));
+	}
+
 }
