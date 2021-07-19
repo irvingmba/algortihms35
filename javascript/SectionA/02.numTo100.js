@@ -1,11 +1,6 @@
 function numTo100(step = 1) {
-  try {
-    console.log(step);
-    1 / (100 - step);
-    numTo100(step + 1);
-  } catch (error) {
-    return;
-  }
+  console.log(step);
+  return step < 100 && numTo100(step + 1);
 }
 
 module.exports = numTo100;
