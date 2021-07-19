@@ -4,19 +4,24 @@ function groupOnes(matrix) {
   let last = 0;
   let leftChanges = null;
   matrix.reduce((prev, row) => {
-    const { fused, lastUsed, changes } = fuseGroups(prev, row, leftChanges, last);
+    const { fused, lastUsed, changes } = fuseGroups(
+      prev,
+      row,
+      leftChanges,
+      last
+    );
     last = lastUsed;
     leftChanges = changes;
     return fused;
   }, []);
-  return last-leftChanges.size;
+  return last - leftChanges.size;
 }
 
 function fuseGroups(prevTop, row, prevChanges, last = 0) {
   let lastUsed = last;
   const changes = prevChanges || new Map();
   const fused = row.reduce((acc, col, i) => {
-    if(col){
+    if (col) {
       const topCol = changes.has(prevTop[i])
           ? changes.get(prevTop[i])
           : prevTop[i],
@@ -25,25 +30,16 @@ function fuseGroups(prevTop, row, prevChanges, last = 0) {
           : changes.has(acc[acc.length - 1])
           ? changes.get(acc[acc.length - 1])
           : acc[acc.length - 1];
-      switch (true) {
-        case Boolean(!topCol && !leftCol): {
-          return [...acc, ++lastUsed];
-        }
-        case Boolean(topCol && !leftCol): {
-          return [...acc, topCol];
-        }
-        case Boolean(!topCol && leftCol): {
-          return [...acc, leftCol];
-        }
-        case Boolean(topCol && leftCol): {
-          const min = Math.min(topCol, leftCol);
-          if (topCol != leftCol) changes.set(Math.max(topCol, leftCol), min);
-          return [...acc, min];
-        }
-        default:
-          return [...acc, col];
+      if (!topCol && !leftCol) return [...acc, ++lastUsed];
+      if (topCol && !leftCol) return [...acc, topCol];
+      if (!topCol && leftCol) return [...acc, leftCol];
+      if (topCol && leftCol) {
+        const min = Math.min(topCol, leftCol);
+        if (topCol != leftCol) changes.set(Math.max(topCol, leftCol), min);
+        return [...acc, min];
       }
-    } 
+      return [...acc, col];
+    }
     return [...acc, col];
   }, []);
   return { fused, lastUsed, changes };
