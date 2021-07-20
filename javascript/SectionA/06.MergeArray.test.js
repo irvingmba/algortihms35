@@ -8,7 +8,7 @@ describe("Testing function to merge two sorted arrays", () => {
   test("Merging two simple arrays", () => {
     const first = [1, 2, 3, , , ,];
     const second = [100, 200, 300];
-    expect(mergeArray(first, second)).toEqual(first.slice(0, 3).concat(second));
+    expect(mergeArray(first, second)).toEqual([1, 2, 3, 100, 200, 300]);
   });
 
   test("Mergin two array with some mixing", () => {
