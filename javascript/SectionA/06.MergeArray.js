@@ -1,22 +1,19 @@
 function mergeArray(firstArray, secondArray) {
   if (!Array.isArray(firstArray) || !Array.isArray(secondArray))
     throw new TypeError("You must input arrays");
-  let pointer = 0;
-  let merged = 0;
-  while (merged < secondArray.length) {
-    const fLast = firstArray.length - secondArray.length - 1 - pointer + merged > -1 ?
-        firstArray[
-          firstArray.length - secondArray.length - 1 - pointer + merged
-        ] : Number.MIN_VALUE,
-      sLast = secondArray[secondArray.length - 1 - merged],
-      lastPosition = firstArray.length - 1 - pointer;
+  let index = firstArray.length - secondArray.length - 1;
+  let pointer = firstArray.length - 1;
+  while (secondArray.length) {
+    const fLast = firstArray[index],
+      sLast = secondArray[secondArray.length - 1];
     if (fLast > sLast) {
-      firstArray[lastPosition] = fLast;
+      firstArray[pointer] = fLast;
+      --index;
     } else {
-      firstArray[lastPosition] = sLast;
-      ++merged;
+      firstArray[pointer] = sLast;
+      secondArray.pop();
     }
-    ++pointer;
+    --pointer;
   }
   return firstArray;
 }
