@@ -1,6 +1,6 @@
 function numTo100(step = 1) {
   console.log(step);
-  return step < 100 && numTo100(step + 1);
+  return 100 - step ? numTo100(step + 1) : null;
 }
 
 module.exports = numTo100;
