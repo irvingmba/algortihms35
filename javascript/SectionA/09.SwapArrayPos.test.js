@@ -11,7 +11,7 @@ describe("Testing function to swap positions of the array", () => {
 
   test("Simple case", () => {
     const sample = [2, 1, 3, 0];
-    const expected = [3, 1, 0, 2];
+    const expected = [0, 1, 2, 3];
     expect(swapArrayPos(sample)).toEqual(expected);
   });
 
