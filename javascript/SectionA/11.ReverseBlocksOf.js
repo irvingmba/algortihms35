@@ -8,8 +8,7 @@ function reverseBlocksOf(arr, size) {
     for (let j = 0; j < Math.ceil(size / 2); ++j) {
       const first = j + size * block,
         last = size * (block + 1) - 1 - j;
-      reversed[first] = arr[last];
-      reversed[last] = arr[first];
+        [arr[first], arr[last]] = [arr[last], arr[first]];
     }
   }
   if (lastChunk) {
@@ -17,11 +16,10 @@ function reverseBlocksOf(arr, size) {
     for (let i = 0; i < halfChunk; ++i) {
       const first = i + size * blocks,
         last = size * blocks + lastChunk - 1 - i;
-      reversed[first] = arr[last];
-      reversed[last] = arr[first];
+        [arr[first], arr[last]] = [arr[last], arr[first]];
     }
   }
-  return reversed;
+  return arr;
 }
 
 module.exports = reverseBlocksOf;
