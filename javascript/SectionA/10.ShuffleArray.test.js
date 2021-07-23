@@ -7,19 +7,19 @@ describe("Testing function to suffle an array", () => {
 
   test("Simple case", () => {
       const sample = [1,2,3,4,5];
-      const shuffled = shuffleArray(sample);
+      const shuffled = shuffleArray([...sample]);
       expect(shuffled).not.toEqual(sample);
   })
 
   test("Second case", () => {
     const sample = [1,2,3,4,5,6,7,8,9,10,11,12];
-    const shuffled = shuffleArray(sample);
+    const shuffled = shuffleArray([...sample]);
     expect(shuffled).not.toEqual(sample);
 })
 
 test("Mini case", () => {
     const sample = [1,2];
-    const shuffled = shuffleArray(sample);
+    const shuffled = shuffleArray([...sample]);
     expect(shuffled).not.toEqual(sample);
 })
 
