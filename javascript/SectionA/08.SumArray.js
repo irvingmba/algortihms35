@@ -21,6 +21,7 @@ function sumArray(first, second) {
     ++index;
   }
   total = add1 + add2;
+  if(!total) return [0];
   const totalArray = [];
   while (total) {
     totalArray.unshift(total % 10);

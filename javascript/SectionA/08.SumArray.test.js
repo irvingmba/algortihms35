@@ -24,4 +24,8 @@ describe("Testing function to add two single-digit arrays", () => {
   test("Other test", () => {
     expect(sumArray([9,9],[1,0,1])).toEqual([2,0,0]);
   })
+
+  test("Sum of nothing", ()=>{
+    expect(sumArray([0],[0])).toEqual([0]);
+  })
 });
