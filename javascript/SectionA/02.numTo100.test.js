@@ -2,7 +2,7 @@ const numTo100 = require("./02.numTo100");
 
 // __spies__
 const spyPrint = jest.spyOn(console, "log");
-spyPrint.mockImplementation(jest.fn());
+// spyPrint.mockImplementation(jest.fn());
 
 describe("Testing function that prints a serie from 1 to 100", () => {
   test("Prints from 1 to 100", () => {
