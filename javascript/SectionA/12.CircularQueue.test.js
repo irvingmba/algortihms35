@@ -7,14 +7,19 @@ describe("Testing circular queue implementation", () => {
 
   test("Simple circular queue", () => {
     const queue = new CircularQueue(5);
-    for (let i = 0; i < queue.size; ++i) {
-      queue.enQueue(i);
-      expect(queue.front).toBe(0);
-      expect(queue.rear).toBe(i);
-    }
-    for(let i=0; i<queue.size; ++i) {
-      expect(queue.deQueue()).toBe(i);
-    }
+    let value = 0;
+    queue.enQueue(value++);
+    queue.enQueue(value++);
+    queue.enQueue(value++);
+    queue.enQueue(value++);
+    queue.enQueue(value++);
+    expect(queue.front).toBe(0);
+    expect(queue.rear).toBe(value - 1);
+    value = 0;
+    expect(queue.deQueue()).toBe(value++);
+    expect(queue.deQueue()).toBe(value++);
+    expect(queue.deQueue()).toBe(value++);
+    expect(queue.deQueue()).toBe(value++);
+    expect(queue.deQueue()).toBe(value++);
   });
-
 });
