@@ -3,7 +3,6 @@ function reverseBlocksOf(arr, size) {
     throw new TypeError("Input an array and a number size block");
   let blocks = Math.floor(arr.length / size),
     lastChunk = arr.length - blocks * size;
-  const reversed = [];
   for (let block = 0; block < blocks; ++block) {
     for (let j = 0; j < Math.ceil(size / 2); ++j) {
       const first = j + size * block,

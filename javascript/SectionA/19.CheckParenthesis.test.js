@@ -12,4 +12,8 @@ describe("Testing function that check parenthesis are balanced", () => {
     test("Case 2", () => {
         expect(checkParenthesis("))")).toBe(2);
     });
+
+    test("Unordered parenthesis", () => {
+        expect(checkParenthesis("))((")).toBe(4);
+    })
 });
