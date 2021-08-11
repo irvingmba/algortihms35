@@ -1,12 +1,14 @@
 function isBalanced(expression) {
   if (typeof expression != "string")
     throw new TypeError("You must input a string");
+  if (!expression.length) return false;
   let p1 = 0,
-    p2 = expression.length - 1,
+    p2 = expression.length,
     captured = "";
-  const rxStart = /[\(\[\{]/, rxFinal = /[\)\]\}]/;
+  const rxStart = /[\(\[\{]/,
+    rxFinal = /[\)\]\}]/;
   while (p1 != p2) {
-    const finalLetter = expression[p2];
+    const finalLetter = expression[p2 - 1];
     switch (captured) {
       case "(": {
         if (finalLetter === ")") captured = "";
@@ -27,7 +29,7 @@ function isBalanced(expression) {
         const letter = expression[p1];
         if (rxStart.test(letter)) {
           captured = letter;
-        } else if(rxFinal.test(letter)) return false;
+        } else if (rxFinal.test(letter)) return false;
         ++p1;
       }
     }
