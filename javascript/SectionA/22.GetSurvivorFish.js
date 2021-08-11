@@ -1,31 +1,61 @@
 function getSurvivorFish(fishes) {
   if (!Array.isArray(fishes)) throw new TypeError("You must input an array");
-  let fishes2Rigth = [],
+  let fishes2Right = [],
     fishes2Left = 0;
   for (const fish of fishes) {
-    if (fishes2Rigth.length) {
+    if(typeof fish === "number"){
+      [fishes2Left, fishes2Right] = fishFigthNums(fishes2Left, fishes2Right, fish);
+      continue;
+    }
+    if (fishes2Right.length) {
       if (fish.direction === "left") {
-        while (fishes2Rigth.length) {
-          const fish2Rigth = fishes2Rigth[fishes2Rigth.length - 1];
+        while (fishes2Right.length) {
+          const fish2Rigth = fishes2Right[fishes2Right.length - 1];
           if (fish.size > fish2Rigth.size) {
-            fishes2Rigth.pop();
+            fishes2Right.pop();
             continue;
           }
           break;
         }
       } else {
-        fishes2Rigth.push(fish);
+        fishes2Right.push(fish);
       }
-      if (!fishes2Rigth.length) ++fishes2Left;
+      if (!fishes2Right.length) ++fishes2Left;
     } else {
-      if (fish.direction === "rigth") {
-        fishes2Rigth.push(fish);
+      if (fish.direction === "right") {
+        fishes2Right.push(fish);
       } else {
         ++fishes2Left;
       }
     }
   }
-  return fishes2Left + fishes2Rigth.length;
+  return fishes2Left + fishes2Right.length;
+}
+
+function fishFigthNums(left, right, fish) {
+  if (right.length) {
+    if (fish < 0) {
+      while (right.length) {
+        const fish2Left = Math.abs(fish);
+        const fish2Rigth = right[right.length - 1];
+        if (fish2Left > fish2Rigth.size) {
+          right.pop();
+          continue;
+        }
+        break;
+      }
+    } else {
+      right.push({ size: fish, direction: "right" });
+    }
+    if (!right.length) ++left;
+  } else {
+    if (fish > 0) {
+      right.push({ size: fish, direction: "right" });
+    } else {
+      ++left;
+    }
+  }
+  return [left, right];
 }
 
 module.exports = getSurvivorFish;
