@@ -13,4 +13,8 @@ describe("Function that calculates editing distance between 2 strings", () => {
   test("A little large words test", () => {
     expect(levenshtein("november","december")).toBe(3);
   })
+
+  test("Very little comparison, tee => tree", () => {
+    expect(levenshtein("tee", "tree")).toBe(1);
+  })
 });

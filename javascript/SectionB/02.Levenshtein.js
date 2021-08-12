@@ -9,7 +9,7 @@ function levenshtein(str1, str2) {
     const compared = [];
     for (let j = 0; j < large.length; ++j) {
       if (j === 0) compared[j] = initial[j] + 1;
-      const largeLetter = large.charAt(j), shortLetter = short.charAt(j);
+      const largeLetter = large.charAt(j), shortLetter = short.charAt(i);
       if(largeLetter === shortLetter) {
         compared[j+1] = initial[j];
       } else {

@@ -6,11 +6,14 @@ describe("Function that checks if a string is a rotation of another", () => {
   });
 
   test(`Simple rotated word case`, () => {
-    expect(isRotationOf("ward", "draw")).toBeTruthy();
+    expect(isRotationOf("square", "resqua")).toBeTruthy();
   });
 
   test(`Not rotated words`, () => {
-    expect(isRotationOf('hello', 'world')).toBeFalsy();
+    expect(isRotationOf("hello", "world")).toBeFalsy();
   });
 
+  test("hello rotation", () => {
+    expect(isRotationOf("hello", "lohel")).toBeTruthy();
+  });
 });
