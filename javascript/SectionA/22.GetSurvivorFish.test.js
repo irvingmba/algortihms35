@@ -13,7 +13,7 @@ describe("Test function that gets how many fishes will survive", () => {
   });
 
   test("Simple fish figth", () => {
-    const fishes = [new Fish(5, "rigth"), new Fish(10, "left")];
+    const fishes = [new Fish(5, "right"), new Fish(10, "left")];
     expect(getSurvivorFish(fishes)).toBe(1);
   });
 
@@ -26,11 +26,11 @@ describe("Test function that gets how many fishes will survive", () => {
     expect(getSurvivorFish(fishes)).toBe(3);
   });
 
-  test("All to the rigth", () => {
+  test("All to the right", () => {
     const fishes = [
-      new Fish(5, "rigth"),
-      new Fish(10, "rigth"),
-      new Fish(12, "rigth"),
+      new Fish(5, "right"),
+      new Fish(10, "right"),
+      new Fish(12, "right"),
     ];
     expect(getSurvivorFish(fishes)).toBe(3);
   });
@@ -38,11 +38,11 @@ describe("Test function that gets how many fishes will survive", () => {
   test("Example test", () => {
     const fishes = [
       new Fish(2, "left"),
-      new Fish(6, "rigth"),
-      new Fish(1, "rigth"),
+      new Fish(6, "right"),
+      new Fish(1, "right"),
       new Fish(7, "left"),
       new Fish(5, "left"),
-      new Fish(4, "rigth"),
+      new Fish(4, "right"),
       new Fish(3, "left"),
     ];
     expect(getSurvivorFish(fishes)).toBe(4);
@@ -52,11 +52,41 @@ describe("Test function that gets how many fishes will survive", () => {
     const fishes = [
       new Fish(2, "left"),
       new Fish(3, "left"),
-      new Fish(4, "rigth"),
-      new Fish(5, "rigth"),
-      new Fish(6, "rigth"),
+      new Fish(4, "right"),
+      new Fish(5, "right"),
+      new Fish(6, "right"),
     ];
     expect(getSurvivorFish(fishes)).toBe(5);
   });
 
+  test("Simple figth fish 2", () => {
+    const fishes = [
+      { size: 2, direction: "right" },
+      { size: 6, direction: "left" },
+    ];
+    expect(getSurvivorFish(fishes)).toBe(1);
+  });
+
+  test("Simple figth fish with numbers", () => {
+    const fishes = [5, -2];
+    expect(getSurvivorFish(fishes)).toBe(1);
+  });
+
+  test("Simple figth fish 2 with numbers", () => {
+    const fishes = [2, -6];
+    expect(getSurvivorFish(fishes)).toBe(1);
+  });
+
+  test("Mixed fish objects and fish numbers", () => {
+    const fishes = [
+      new Fish(2, "left"),
+      6,
+      new Fish(1, "right"),
+      -7,
+      new Fish(5, "left"),
+      4,
+      new Fish(3, "left"),
+    ];
+    expect(getSurvivorFish(fishes)).toBe(4);
+  })
 });
